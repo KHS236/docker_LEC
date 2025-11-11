@@ -1,0 +1,16 @@
+도커 허브에 푸시하기
+docker login
+
+# TAG 추가
+docker tag bn     fdsa51004/khs:bn
+docker tag fn     fdsa51004/khs:fn
+docker tag redis  fdsa51004/khs:redis
+docker tag db     fdsa51004/khs:db
+
+# PUSH
+docker push fdsa51004/jhs:bn
+docker push fdsa51004/jhs:fn
+docker push fdsa51004/jhs:redis
+docker push fdsa51004/khs:db
+
+

@@ -1,0 +1,53 @@
+# PUSH
+# 이미지 생성
+docker build -t [이미지명:태그명] [도커파일위치]
+
+# 이미지 확인
+docker images
+
+# 이미지 삭제
+docker rmi [id or 이미지명]
+
+# 도커 이미지 내 진입
+docker run -it  [id or 이미지:태그명] sh
+
+# 임시 컨테이너 생성 후 외부포트와 연결
+docker run -it --rm -p 3000:80 fn:1.1
+
+
+
+명령어로 지우기
+docker ps (프로세스 확인)
+
+docker ps -a 정지 포함 확인이었나 그랬음
+
+정지
+docker stop 프로세스ID
+
+리무브
+docker rm 프로세스 id
+----------------------
+docker images (이미지 확인)
+
+docker rmi 프로세스id (리무브이미지)
+
+-------------------------
+
+docker network ls 만들어진 네트워크 정보 확인
+--------------------------
+도커 허브에 푸시하기
+docker login
+
+# TAG 추가
+docker tag bn     fdsa51004/khs:bn
+docker tag fn     fdsa51004/khs:fn
+docker tag redis  fdsa51004/khs:redis
+docker tag db     fdsa51004/khs:db
+
+# PUSH
+docker push fdsa51004/jhs:bn
+docker push fdsa51004/jhs:fn
+docker push fdsa51004/jhs:redis
+docker push fdsa51004/khs:db
+
+도커 허브에서 풀 하기
