@@ -8,9 +8,7 @@ networks:
         - subnet : 172.30.0.0/24
           gateway : 172.30.0.1
 
-
 services:
-
   db:
     image: db
     build:
@@ -24,21 +22,19 @@ services:
       test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
       interval: 30s
       timeout: 10s
-      retries: 5
-    volumes:
-      # - ./DB/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - db-data:/var/lib/mysql   # << mysql 저장 위치
+      retries: 5          
     ports:
       - "3330:3306"
-
     environment:
       MYSQL_ROOT_PASSWORD: Zhfldk11!
       MYSQL_DATABASE: testdb
       MYSQL_USER: dbconn
       MYSQL_PASSWORD: Zhfldk11!
-      MYSQL_ROOT_HOST: '%'
-
-
+      MYSQL_ROOT_HOST: '%' 
+    volumes:
+      # - ./DB/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db-data:/var/lib/mysql           
+  
   redis:
     image: redis
     build:
@@ -48,21 +44,20 @@ services:
       - "6380:6379"
     networks:
       custom-network:
-        ipv4_address: 172.30.0.20
-
+        ipv4_address: 172.30.0.20  
   fn:
     image: fn
     build:
       context: ./FN
     container_name: fn-container
     ports:
-       - "3000:80"
+      - "3000:80"
     depends_on:
-      db:
+      bn:
         condition: service_healthy
     networks:
-       custom-network:
-        ipv4_address: 172.30.0.30
+      custom-network:
+        ipv4_address: 172.30.0.30 
 
   bn:
     image: bn
@@ -79,7 +74,7 @@ services:
       SERVER_PORT: 8090
 
     healthcheck:
-      test: [ "CMD-SHELL", "curl -f http://127.0.0.1:8090/actuator/health" ]
+      test: ["CMD-SHELL", "curl -f  http://127.0.0.1:8090/actuator/health"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -89,8 +84,9 @@ services:
         condition: service_healthy
 
     networks:
-       custom-network:
-        ipv4_address: 172.30.0.40
+      custom-network:
+        ipv4_address: 172.30.0.40  
 
+        
 volumes:
   db-data:

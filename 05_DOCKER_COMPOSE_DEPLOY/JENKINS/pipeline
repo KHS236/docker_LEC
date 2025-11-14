@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        GITHUB_REPO = '배포할 GITHUB URL'
+        GITHUB_REPO = 'https://github.com/KHS236/docker_LEC.git'
         TARGET_DIR = 'REPOSITORY NAME'
         EC2_HOST = '13.125.125.190'  // EC2 인스턴스의 퍼블릭 IP나 DNS
         EC2_USER = 'ec2-user'       // EC2 사용자 이름 (Amazon Linux의 경우 'ec2-user', Ubuntu의 경우 'ubuntu')
